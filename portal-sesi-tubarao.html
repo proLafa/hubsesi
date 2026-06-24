@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub Pedagógico · Escola SESI Tubarão · Ensino Médio 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --teal:    #1a7e8f;
+    --teal-dk: #145f6b;
+    --teal-lt: #e6f6f8;
+    --gold:    #d4a017;
+    --green:   #3aaa55;
+    --red:     #c0392b;
+    --navy:    #1e3a5f;
+    --text:    #1a2332;
+    --muted:   #5a6a7a;
+    --border:  #dde4ea;
+    --bg:      #f4f7fa;
+    --card:    #ffffff;
+    --radius:  12px;
+    --shadow:  0 2px 12px rgba(0,0,0,.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dk) 100%);
+    color: #fff;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,.2);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 68px;
+  }
+  .logo-badge {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex-shrink: 0;
+  }
+  .logo-badge svg { width: 36px; height: 36px; }
+  .logo-text { line-height: 1.15; }
+  .logo-text strong { font-size: .95rem; font-weight: 800; letter-spacing: .02em; }
+  .logo-text span { font-size: .72rem; opacity: .85; display: block; }
+  .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.3); flex-shrink: 0; }
+  .header-title { font-size: 1rem; font-weight: 700; opacity: .95; }
+  .header-tag {
+    margin-left: auto;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 20px;
+    padding: .25rem .75rem;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+    white-space: nowrap;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--teal-dk) 0%, #0d4f5c 50%, var(--navy) 100%);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -.01em;
+    margin-bottom: .6rem;
+  }
+  .hero p {
+    font-size: .95rem;
+    opacity: .8;
+    max-width: 540px;
+    margin: 0 auto 1.6rem;
+    line-height: 1.6;
+  }
+  .search-wrap {
+    max-width: 460px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: .85rem 1.1rem .85rem 3rem;
+    border-radius: 50px;
+    border: none;
+    font-size: .92rem;
+    font-family: inherit;
+    outline: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,.2);
+    color: var(--text);
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: .7rem 2rem;
+  }
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .stat { font-size: .78rem; color: var(--muted); }
+  .stat strong { color: var(--teal); font-weight: 700; }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 2.5rem; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+    padding-bottom: .6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .section-header .count {
+    margin-left: auto;
+    font-size: .72rem;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: .15rem .5rem;
+    border-radius: 20px;
+  }
+
+  /* ── GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all .18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--accent, var(--teal));
+    border-radius: 4px 0 0 4px;
+  }
+  .card:hover {
+    border-color: var(--accent, var(--teal));
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    background: var(--icon-bg, var(--teal-lt));
+  }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title {
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: .25rem;
+  }
+  .card-sub {
+    font-size: .73rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .card-arrow {
+    color: var(--muted);
+    flex-shrink: 0;
+    align-self: center;
+    font-size: .85rem;
+    opacity: .5;
+    transition: opacity .15s;
+  }
+  .card:hover .card-arrow { opacity: 1; color: var(--accent, var(--teal)); }
+
+  /* ── HIDDEN (search) ── */
+  .card.hidden { display: none; }
+  .section.all-hidden { display: none; }
+
+  /* ── NO RESULTS ── */
+  #no-results {
+    display: none;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-size: .92rem;
+  }
+
+  /* ── ADMIN BUTTON ── */
+  .fab {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: .7rem 1.4rem;
+    font-family: inherit;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    transition: background .15s, transform .15s;
+    z-index: 200;
+  }
+  .fab:hover { background: var(--teal-dk); transform: translateY(-2px); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 520px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 32px; height: 32px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+  }
+  .modal-close:hover { background: var(--border); color: var(--text); }
+  .modal h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--teal); }
+
+  /* ── FORM ── */
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: .8rem;
+    font-weight: 600;
+    margin-bottom: .35rem;
+    color: var(--muted);
+    letter-spacing: .02em;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: .7rem .9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: .88rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s;
+    background: #fff;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--teal); }
+
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    padding: .75rem 1.5rem;
+    font-family: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background .15s;
+  }
+  .btn-primary:hover { background: var(--teal-dk); }
+
+  .msg {
+    font-size: .8rem;
+    padding: .6rem .9rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .msg.error { background: #fdeaea; color: #c0392b; border: 1px solid #f5c6c6; display: block; }
+  .msg.success { background: #e6f6ee; color: #1e7e3e; border: 1px solid #b8e0c8; display: block; }
+
+  /* ── MANAGE LIST ── */
+  .manage-list { margin-top: 1.5rem; }
+  .manage-item {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .6rem .8rem;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    margin-bottom: .5rem;
+    font-size: .82rem;
+    background: var(--bg);
+  }
+  .manage-item span { flex: 1; color: var(--text); font-weight: 500; word-break: break-all; }
+  .manage-item small { color: var(--muted); font-size: .72rem; }
+  .btn-del {
+    background: #fdeaea;
+    border: 1px solid #f5c6c6;
+    color: #c0392b;
+    border-radius: 7px;
+    padding: .25rem .6rem;
+    font-size: .72rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .btn-del:hover { background: #f5c6c6; }
+  .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; }
+  .tab {
+    flex: 1;
+    padding: .55rem;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all .15s;
+  }
+  .tab.active { border-color: var(--teal); background: var(--teal-lt); color: var(--teal); }
+
+  /* ── PASSWORD SCREEN ── */
+  #pw-screen { display: block; }
+  #admin-panel { display: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    font-size: .72rem;
+    padding: 1.2rem;
+  }
+
+  @media(max-width:600px){
+    .cards-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.4rem; }
+    .header-title { display: none; }
+    .fab { bottom: 1rem; right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-badge">
+      <svg viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="18" fill="white" opacity=".15"/>
+        <path d="M18 6 A12 12 0 0 1 30 18" stroke="#4ecca3" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M30 18 A12 12 0 0 1 18 30" stroke="#e8c93c" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M18 30 A12 12 0 0 1 6 18" stroke="#e05a4e" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M6 18 A12 12 0 0 1 18 6" stroke="#4da6d4" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="18" cy="18" r="5" fill="white" opacity=".9"/>
+      </svg>
+      <div class="logo-text">
+        <strong>ESCOLA SESI</strong>
+        <span>Tubarão · SC</span>
+      </div>
+    </div>
+    <div class="header-divider"></div>
+    <span class="header-title">Hub Pedagógico — Ensino Médio</span>
+    <span class="header-tag">2026</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Recursos e Ferramentas Pedagógicas</h1>
+  <p>Acesso rápido a todos os links, documentos e plataformas do Ensino Médio Tubarão.</p>
+  <div class="search-wrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="search" placeholder="Buscar por nome ou categoria…" autocomplete="off">
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">🏫 <strong>Escola SESI</strong> Tubarão</div>
+    <div class="stat">📅 Ano letivo <strong>2026</strong></div>
+    <div class="stat">🔗 <strong id="total-links">0</strong> links disponíveis</div>
+    <div class="stat">📂 <strong id="total-cats">0</strong> categorias</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main id="main-content"></main>
+
+<div id="no-results">
+  <p style="font-size:2rem;margin-bottom:.5rem">🔍</p>
+  <p>Nenhum resultado encontrado para "<span id="search-term"></span>".</p>
+</div>
+
+<!-- FOOTER -->
+<footer>Escola SESI Tubarão · Ensino Médio 2026 · Portal interno de recursos pedagógicos</footer>
+
+<!-- FAB admin -->
+<button class="fab" onclick="openAdminModal()">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+  Administrar
+</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeOnBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- PASSWORD SCREEN -->
+    <div id="pw-screen">
+      <h2>🔐 Acesso Administrativo</h2>
+      <div class="msg" id="pw-msg"></div>
+      <div class="form-group">
+        <label>SENHA DE ADMINISTRADOR</label>
+        <input type="password" id="pw-input" placeholder="Digite a senha…" onkeydown="if(event.key==='Enter')checkPw()">
+      </div>
+      <button class="btn-primary" onclick="checkPw()">Entrar</button>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="admin-panel">
+      <h2>⚙️ Painel do Administrador</h2>
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('add')">➕ Adicionar Link</button>
+        <button class="tab" onclick="switchTab('manage')">📋 Gerenciar</button>
+      </div>
+
+      <!-- ADD TAB -->
+      <div id="tab-add">
+        <div class="msg" id="add-msg"></div>
+        <div class="form-group">
+          <label>NOME DO LINK *</label>
+          <input type="text" id="new-title" placeholder="Ex: Plano de Aula 2026">
+        </div>
+        <div class="form-group">
+          <label>URL *</label>
+          <input type="url" id="new-url" placeholder="https://…">
+        </div>
+        <div class="form-group">
+          <label>CATEGORIA *</label>
+          <select id="new-cat">
+            <option value="">— Selecione —</option>
+            <option value="Hub Educacional">Hub Educacional</option>
+            <option value="Documentos Norteadores">Documentos Norteadores</option>
+            <option value="Planejamento Curricular">Planejamento Curricular</option>
+            <option value="Programa Lekto">Programa Socioemocional Lekto</option>
+            <option value="Portfólio">Portfólio</option>
+            <option value="Rotina Pedagógica">Rotina Pedagógica</option>
+            <option value="Conselho de Classe">Conselho de Classe</option>
+            <option value="Avaliação PASSE">Avaliação PASSE / Avalia</option>
+            <option value="Saídas e Eventos">Saídas Pedagógicas e Eventos</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>DESCRIÇÃO (opcional)</label>
+          <input type="text" id="new-sub" placeholder="Breve descrição do link">
+        </div>
+        <button class="btn-primary" onclick="addLink()">Salvar Link</button>
+      </div>
+
+      <!-- MANAGE TAB -->
+      <div id="tab-manage" style="display:none">
+        <div id="manage-list-el"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── ADMIN PASSWORD ──
+const ADMIN_PW = 'sesi2026adm'; // altere aqui
+
+// ── ICON MAP ──
+const ICONS = {
+  'Hub Educacional':              { icon:'🏫', bg:'#e6f3ff', accent:'#2980b9' },
+  'Documentos Norteadores':       { icon:'📄', bg:'#e8f5e9', accent:'#27ae60' },
+  'Planejamento Curricular':      { icon:'📋', bg:'#fff3e0', accent:'#e67e22' },
+  'Programa Socioemocional Lekto':{ icon:'💜', bg:'#f3e5f5', accent:'#8e44ad' },
+  'Portfólio':                    { icon:'🗂️', bg:'#e0f7fa', accent:'#00838f' },
+  'Rotina Pedagógica':            { icon:'📅', bg:'#e8f5e9', accent:'#2e7d32' },
+  'Conselho de Classe':           { icon:'🤝', bg:'#fff8e1', accent:'#f57f17' },
+  'Avaliação PASSE':              { icon:'📊', bg:'#fce4ec', accent:'#c0392b' },
+  'Saídas e Eventos':             { icon:'🎉', bg:'#e1f5fe', accent:'#0277bd' },
+  'Outros':                       { icon:'🔗', bg:'#f3f4f6', accent:'#607d8b' },
+};
+
+// ── INITIAL LINKS (from PDF) ──
+const DEFAULT_LINKS = [
+  // Hub Educacional
+  { id:'l1', cat:'Hub Educacional', title:'Hub Educacional SESI — Seção Pedagógico Médio', sub:'Portal principal de recursos para Ensino Médio', url:'https://sites.google.com/sesisc.org.br/projetosgered/pedag%C3%B3gico/pedagogico-m%C3%A9dio' },
+
+  // Documentos Norteadores
+  { id:'l2', cat:'Documentos Norteadores', title:'Regimento Escolar SESI 2026', sub:'PDF — Documento oficial', url:'https://bc.tic.fiescnet.com.br/kb_upload/file/Regimento%20Escolar%20SESI%202026_of.pdf' },
+  { id:'l3', cat:'Documentos Norteadores', title:'Projeto Político Pedagógico 2026', sub:'Canva — PPP Escola SESI', url:'https://www.canva.com/design/DAHDLv_WuKY/GRRLJjYs777i8lAz-hc25w/edit' },
+  { id:'l4', cat:'Documentos Norteadores', title:'Guias para Família e Estudantes', sub:'Drive — Guia de Convivência na Escola', url:'https://drive.google.com/file/d/1x1q4YT4UhSDlkhp26E2esSVMsg2Cw6H8/view' },
+  { id:'l5', cat:'Documentos Norteadores', title:'Proposta Pedagógica — Formação 20/03', sub:'Google Slides — Proposta Pedagógica SESI', url:'https://docs.google.com/presentation/d/1P7sD5Z5MRjJ0nURXqZz4MvaFRqRzpQWw/edit' },
+
+  // Planejamento Curricular
+  { id:'l6', cat:'Planejamento Curricular', title:'Matrizes SESI 2025 — Referência Curricular', sub:'Google Sheets — Habilidades e objetivos de aprendizagem', url:'https://docs.google.com/spreadsheets/d/1jyzt8j1kklTQUocFRJrKEw450DBD-CcAfECPQ4DvyMA/edit' },
+  { id:'l7', cat:'Planejamento Curricular', title:'Plano de Ensino / Plano de Aula / Projetos', sub:'Drive — Pasta documentos de planejamento 2026', url:'https://drive.google.com/drive/folders/1q1tESFkk0Z5XxGnNH-v4Q3Pf0ChESSUo' },
+  { id:'l8', cat:'Planejamento Curricular', title:'Matrizes Curriculares 2023/2024', sub:'Drive — Matrizes anteriores para referência', url:'https://drive.google.com/drive/folders/1IS-1WJWGqQBcEPZ5L8r3N9n4EKHa2X1S' },
+  { id:'l9', cat:'Planejamento Curricular', title:'Gamificação — Pasta de Links', sub:'Canva — Cartão Resposta e materiais de gamificação', url:'https://www.canva.com/design/DAF9cWojjVM/ITfqDViOYOtNqtKXD8pHnw/edit' },
+
+  // Programa Lekto
+  { id:'l10', cat:'Programa Socioemocional Lekto', title:'Portfólios de Trilhas Lekto 2026', sub:'Suporte Lekto — Trilhas sociemocionais', url:'https://suporte.lekto.com.br/hc/pt-br/articles/33240104896525-Portf%C3%B3lios-de-Trilhas-2026' },
+  { id:'l11', cat:'Programa Socioemocional Lekto', title:'Orientações Lekto 2026 — Novidades', sub:'Drive — Guia de orientações para professores', url:'https://drive.google.com/file/d/1QW7rY5ikrOFI-YoRgtaB_kkwuMdaRRz-/view' },
+  { id:'l12', cat:'Programa Socioemocional Lekto', title:'Matriz Socioemocional', sub:'Drive — Matriz de competências socioemocionais', url:'https://drive.google.com/file/d/1Gu7x7JsbB-xg1S2VvmJTYnEyE5bbz-bo/view' },
+  { id:'l13', cat:'Programa Socioemocional Lekto', title:'Trilhas 1ª Série — Planilha', sub:'Google Sheets — Escolha e registro de trilhas', url:'https://docs.google.com/spreadsheets/d/1xpBoyc9zmzZcpzLdbf4qWSfR71kgkdPT/edit' },
+  { id:'l14', cat:'Programa Socioemocional Lekto', title:'Trilhas 2ª Série — Planilha', sub:'Google Sheets — Escolha e registro de trilhas', url:'https://drive.google.com/file/d/1_M8IUuBZXU3FhmCrd6SkRCbfBz5xsLEE/view' },
+  { id:'l15', cat:'Programa Socioemocional Lekto', title:'Trilhas 3ª Série — Planilha', sub:'Google Sheets — Escolha e registro de trilhas', url:'https://drive.google.com/file/d/1FWmXOIU-Y2ItHP97PF_9mrC9X7yOuB5U/view' },
+
+  // Portfólio
+  { id:'l16', cat:'Portfólio', title:'Portfólios 101 — Planilha Geral', sub:'Google Sheets — Links dos portfólios dos estudantes', url:'https://docs.google.com/spreadsheets/d/18xtxxxYqHjjXKWqEF8MRd8-_SbYPAtvF7PEMnSTie7k/edit' },
+  { id:'l17', cat:'Portfólio', title:'Apresentação Portfólio — Slides', sub:'Canva — Modelo de apresentação do portfólio', url:'https://www.canva.com/design/DAGr7UqCUgI/eerRLmwI65srQ1kOR7sr2g/view' },
+  { id:'l18', cat:'Portfólio', title:'Rotina Pedagógica — Pasta Drive 1', sub:'Drive — Materiais de rotina pedagógica', url:'https://drive.google.com/drive/u/0/folders/1jcUotbukZjEijwnQwxU3vKvVr-J3Uo89' },
+
+  // Rotina Pedagógica
+  { id:'l19', cat:'Rotina Pedagógica', title:'Calendário Escolar 2026', sub:'Google Sheets — Datas e eventos do ano letivo', url:'https://docs.google.com/spreadsheets/d/17vaksM1OQ9g83pd-W-J8hkoCE5RtyopR/edit' },
+  { id:'l20', cat:'Rotina Pedagógica', title:'Horário 2026 — Grade de Aulas', sub:'Google Sheets — Horário das turmas', url:'https://docs.google.com/spreadsheets/d/1LggyTD1vO2y0QUmqrOmCfuyFY3G6Legl/edit' },
+  { id:'l21', cat:'Rotina Pedagógica', title:'Calendário de Provas — Ensino Médio 2026', sub:'Google Sheets — Provas e avaliações por trimestre', url:'https://docs.google.com/spreadsheets/d/1RvH7gt7V5-1eb0SSsGDdpDyRgtiz2JuV/edit' },
+  { id:'l22', cat:'Rotina Pedagógica', title:'Espelho de Classe', sub:'Google Doc — Mapa de sala de aula', url:'https://docs.google.com/document/d/1cbzlCTcdnObPwCfc6QqQyD5vM4u11lsijFO9jq5OG3E/edit' },
+  { id:'l23', cat:'Rotina Pedagógica', title:'Calendário Olímpiadas 2026', sub:'Google Sheets — Olimpíadas e eventos competitivos', url:'https://docs.google.com/spreadsheets/d/1O3274tORHh-PQRQm3nZYmObVuX8e9sj7myZTOKnkCOw/edit' },
+  { id:'l24', cat:'Rotina Pedagógica', title:'Links Planilha Olimpíadas', sub:'Google Sheets — Planilha de acompanhamento', url:'https://docs.google.com/spreadsheets/d/1NY6MgZEZMpKubjcgiiQjsfVarjcZD3do/edit' },
+  { id:'l25', cat:'Rotina Pedagógica', title:'PEI e Relação de Estudantes', sub:'Google Sheets — Plano Educacional Individualizado', url:'https://docs.google.com/spreadsheets/d/1gTCVHJySMupmSlHPdjxi9mkdJNU_FXZ-/edit' },
+  { id:'l26', cat:'Rotina Pedagógica', title:'Inserir na Planilha de Acompanhamento', sub:'Google Sheets — Registro e acompanhamento', url:'https://docs.google.com/spreadsheets/d/1_A7PsIcKrpH93yCMK-J1K232fnnXJC6U/edit' },
+  { id:'l27', cat:'Rotina Pedagógica', title:'Pasta Rotina — Drive Litoral Sul', sub:'Drive — Materiais e documentos de rotina', url:'https://drive.google.com/drive/u/0/folders/12xIrMF2-twlS37p_hAtsLjQ3Uy9JBRG6' },
+  { id:'l28', cat:'Rotina Pedagógica', title:'Pasta de Recursos — Drive Geral', sub:'Drive — Pasta de recursos pedagógicos', url:'https://drive.google.com/drive/u/0/folders/1dOuaDHuMNpS8KStSE6VOU6K1LfF0isrl' },
+  { id:'l29', cat:'Rotina Pedagógica', title:'Pasta Complementar — Drive 2', sub:'Drive — Recursos complementares', url:'https://drive.google.com/drive/u/0/folders/12uKinSSYq8a5CP-P-m0ufZM_W-JVY4V0' },
+
+  // Conselho de Classe
+  { id:'l30', cat:'Conselho de Classe', title:'Memória de Conselho — Conselho de Classe 2026', sub:'Google Sheets — EF e EM, documento padronizado', url:'https://docs.google.com/spreadsheets/d/1JvGOURy0Go_FJ_B3bKsY8SsJYpeW1uNC/edit' },
+  { id:'l31', cat:'Conselho de Classe', title:'Vídeo Tutorial — Fechando Diário de Classe', sub:'Drive — Tutorial fechamento de diário no trimestre', url:'https://drive.google.com/file/d/1PFFxjwtCYJpYsFeHw5kbos5UlwDg-fog/view' },
+  { id:'l32', cat:'Conselho de Classe', title:'Pasta Drive — Conselho de Classe', sub:'Drive — Documentos norteadores', url:'https://drive.google.com/drive/u/0/folders/1eUEFQn0NUPwm--5CdbFSCPfYcnWFfSdw' },
+
+  // Avaliação PASSE
+  { id:'l33', cat:'Avaliação PASSE', title:'Avalia SESI 2026 — Planilha de Acompanhamento', sub:'Google Sheets — Registro de aplicadores por turma', url:'https://docs.google.com/spreadsheets/d/1etXqi2c3eA9a-Uas4gevTk4VbCBg2WHx/edit' },
+  { id:'l34', cat:'Avaliação PASSE', title:'Orientações para o Avalia — Documento', sub:'Google Doc — Orientações de aplicação', url:'https://docs.google.com/document/d/1kj3bFBrMTepPKbHymCPf4jj3vhniUht2/edit' },
+
+  // Saídas e Eventos
+  { id:'l35', cat:'Saídas e Eventos', title:'Saídas Pedagógicas 2026 — Planilha', sub:'Google Sheets — Registro de saídas pedagógicas', url:'https://docs.google.com/spreadsheets/d/19TOgFFBHBEP33J418g16hLPmavKg8CW7/edit' },
+  { id:'l36', cat:'Saídas e Eventos', title:'Dia da Família 2026 — Fotos', sub:'Drive — Fotos do Dia da Família na Escola', url:'https://drive.google.com/drive/folders/10A212Svm5bOIkNm6-K6XSpZTW1q1_Pof' },
+  { id:'l37', cat:'Saídas e Eventos', title:'Mostra STEAM 2026 — Litoral Sul', sub:'Google Sheets — Planilha Mostra STEAM', url:'https://docs.google.com/spreadsheets/d/15NkSZHWCebUtVGHN62ZIRv-8by27_sAX/view' },
+];
+
+// ── STATE ──
+let links = JSON.parse(localStorage.getItem('sesi_links') || 'null') || [...DEFAULT_LINKS];
+let authed = false;
+let activeTab = 'add';
+
+function save() { localStorage.setItem('sesi_links', JSON.stringify(links)); }
+
+// ── RENDER ──
+function getCats() {
+  const order = ['Hub Educacional','Documentos Norteadores','Planejamento Curricular',
+    'Programa Socioemocional Lekto','Portfólio','Rotina Pedagógica',
+    'Conselho de Classe','Avaliação PASSE','Saídas e Eventos','Outros'];
+  const cats = [...new Set(links.map(l=>l.cat))];
+  return [...order.filter(c=>cats.includes(c)), ...cats.filter(c=>!order.includes(c))];
+}
+
+function render(filter='') {
+  const main = document.getElementById('main-content');
+  const noRes = document.getElementById('no-results');
+  const q = filter.toLowerCase().trim();
+  const cats = getCats();
+  let anyVisible = false;
+
+  main.innerHTML = '';
+  cats.forEach(cat => {
+    const cfg = ICONS[cat] || ICONS['Outros'];
+    const catLinks = links.filter(l => l.cat === cat);
+    const visible = catLinks.filter(l =>
+      !q || l.title.toLowerCase().includes(q) || l.cat.toLowerCase().includes(q) || (l.sub||'').toLowerCase().includes(q)
+    );
+    if(visible.length === 0) return;
+    anyVisible = true;
+
+    const sec = document.createElement('section');
+    sec.className = 'section';
+    sec.innerHTML = `
+      <div class="section-header">
+        <div class="section-icon" style="background:${cfg.bg};color:${cfg.accent}">${cfg.icon}</div>
+        <h2>${cat}</h2>
+        <span class="count">${visible.length} link${visible.length>1?'s':''}</span>
+      </div>
+      <div class="cards-grid">
+        ${visible.map(l=>`
+          <a class="card" href="${l.url}" target="_blank" rel="noopener" style="--accent:${cfg.accent}">
+            <div class="card-icon" style="background:${cfg.bg};color:${cfg.accent}">${cfg.icon}</div>
+            <div class="card-body">
+              <div class="card-title">${l.title}</div>
+              ${l.sub?`<div class="card-sub">${l.sub}</div>`:''}
+            </div>
+            <span class="card-arrow">↗</span>
+          </a>
+        `).join('')}
+      </div>`;
+    main.appendChild(sec);
+  });
+
+  noRes.style.display = anyVisible ? 'none' : 'block';
+  document.getElementById('search-term').textContent = q;
+  document.getElementById('total-links').textContent = links.length;
+  document.getElementById('total-cats').textContent = cats.length;
+}
+
+// ── SEARCH ──
+document.getElementById('search').addEventListener('input', function(){ render(this.value); });
+
+// ── MODAL ──
+function openAdminModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  if(!authed){
+    document.getElementById('pw-screen').style.display='block';
+    document.getElementById('admin-panel').style.display='none';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-msg').className='msg';
+    setTimeout(()=>document.getElementById('pw-input').focus(),100);
+  }
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+function closeOnBg(e){ if(e.target===e.currentTarget) closeModal(); }
+
+// ── PASSWORD ──
+function checkPw(){
+  const v = document.getElementById('pw-input').value;
+  if(v === ADMIN_PW){
+    authed = true;
+    document.getElementById('pw-screen').style.display='none';
+    document.getElementById('admin-panel').style.display='block';
+    renderManage();
+  } else {
+    const m = document.getElementById('pw-msg');
+    m.className='msg error';
+    m.textContent='Senha incorreta. Tente novamente.';
+  }
+}
+
+// ── TABS ──
+function switchTab(t){
+  activeTab = t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active', (i===0&&t==='add')||(i===1&&t==='manage')));
+  document.getElementById('tab-add').style.display = t==='add'?'block':'none';
+  document.getElementById('tab-manage').style.display = t==='manage'?'block':'none';
+  if(t==='manage') renderManage();
+}
+
+// ── ADD LINK ──
+function addLink(){
+  const title = document.getElementById('new-title').value.trim();
+  const url   = document.getElementById('new-url').value.trim();
+  const cat   = document.getElementById('new-cat').value;
+  const sub   = document.getElementById('new-sub').value.trim();
+  const msg   = document.getElementById('add-msg');
+
+  if(!title||!url||!cat){
+    msg.className='msg error'; msg.textContent='Preencha todos os campos obrigatórios (*)'; return;
+  }
+  if(!url.startsWith('http')){
+    msg.className='msg error'; msg.textContent='URL inválida. Deve começar com https://'; return;
+  }
+
+  const newLink = { id:'l'+Date.now(), cat, title, sub, url };
+  links.push(newLink);
+  save();
+  render(document.getElementById('search').value);
+
+  msg.className='msg success'; msg.textContent='✅ Link adicionado com sucesso!';
+  document.getElementById('new-title').value='';
+  document.getElementById('new-url').value='';
+  document.getElementById('new-cat').value='';
+  document.getElementById('new-sub').value='';
+  setTimeout(()=>{ msg.className='msg'; },3000);
+}
+
+// ── MANAGE ──
+function renderManage(){
+  const el = document.getElementById('manage-list-el');
+  if(!links.length){ el.innerHTML='<p style="color:var(--muted);font-size:.82rem;text-align:center;padding:1rem">Nenhum link cadastrado.</p>'; return; }
+  el.innerHTML = links.map(l=>`
+    <div class="manage-item">
+      <span>${l.title}<br><small>${l.cat}</small></span>
+      <button class="btn-del" onclick="delLink('${l.id}')">Excluir</button>
+    </div>
+  `).join('');
+}
+
+function delLink(id){
+  if(!confirm('Excluir este link?')) return;
+  links = links.filter(l=>l.id!==id);
+  save();
+  render(document.getElementById('search').value);
+  renderManage();
+}
+
+// ── INIT ──
+render();
+</script>
+</body>
+</html>
